@@ -14,11 +14,11 @@ load_dotenv('dev.env')
 # Fetch the SendGrid API key from the environment
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-# Twilio credentials
-TWILIO_ACCOUNT_SID = 'AC1ca1f54ffee2088bc187d474ddbe057d'  # Replace with your Twilio Account SID
-TWILIO_AUTH_TOKEN = 'be0e4a4cc17a6a2d7ec1349c23fdf718'    # Replace with your Twilio Auth Token
-TWILIO_PHONE_NUMBER = '+18559174810'            # Your Twilio phone number
-TO_PHONE_NUMBER = '+16673454053'                # Temporary phone number (use from user later)
+# Twilio credentials from environment variables
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
+TO_PHONE_NUMBER = os.getenv('TO_PHONE_NUMBER')
 
 # Define alert thresholds for actual and predicted values
 TEMP_HIGH = 30.0
