@@ -1,63 +1,108 @@
-/* Auth.css */
-.auth-container {
+/* Scoped Auth Page Styling */
+.auth-page {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-  }
-  
-  .auth-box {
-    background-color: white;
+}
+
+/* Container styling */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 300px;
     text-align: center;
-  }
-  
-  .auth-title {
-    font-size: 2em;
-    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for the container */
+.auth-container:hover {
+    transform: scale(1.02);
+}
+
+/* Title styling */
+.auth-title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Form styling */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.auth-form label {
+    margin-bottom: 8px;
+    font-weight: 600;
     color: #333;
-  }
-  
-  .auth-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+}
+
+.auth-form input {
+    margin-bottom: 10px;
+    padding: 12px;
     font-size: 1em;
-  }
-  
-  .auth-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: #3498db;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(52, 152, 219, 0.2);
+}
+
+/* Button styling */
+.auth-button {
+    padding: 14px;
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s;
-  }
-  
-  .auth-button:hover {
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.auth-button:hover {
     background-color: #2980b9;
-  }
-  
-  .auth-footer {
-    margin-top: 20px;
-  }
-  
-  .auth-link {
+    transform: translateY(-2px);
+}
+
+/* Signup text styling */
+.signup-text {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.signup-link {
     color: #3498db;
+    cursor: pointer;
     text-decoration: none;
-  }
-  
-  .auth-link:hover {
-    text-decoration: underline;
-  }
-  
+    font-weight: 600;
+}
+
+.signup-link:hover {
+    color: #2980b9;
+}
+
+/* Email hint styling */
+.email-hint {
+    color: red;
+    font-size: 0.8em;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    font-style: italic;
+}

@@ -1,34 +1,27 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import React from "react";
-import Auth from "./Auth";  // Import the authentication component
-import Home from "./Home";  // Import the new homepage component
-import AboutUs from "./AboutUs";  // Import the About Us component
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Auth from "./Auth";  
+import Home from "./Home";  
+import AboutUs from "./AboutUs";  
 import Navbar from "./Navbar";
 import ContactUs from "./ContactUs";
 
 function App() {
     return (
         <Router>
-            <AppContent />  {/* Move content to another component */}
+            <div>
+                {/* Navbar should be visible on all pages except auth */}
+                <Routes>
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/*" element={<Navbar />} />
+                </Routes>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/contact" element={<ContactUs />} />
+                </Routes>
+            </div>
         </Router>
-    );
-}
-
-function AppContent() {
-    const location = useLocation();
-
-    return (
-        <div>
-            {/* Show the Navbar only if the path is not '/auth' */}
-            {location.pathname !== '/auth' && <Navbar />}
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                {/* Add other routes here */}
-            </Routes>
-        </div>
     );
 }
 
