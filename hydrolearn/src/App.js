@@ -6,6 +6,7 @@ import Auth from "./Auth";  // Import the authentication component
 import Home from "./Home";  // Import the new homepage component
 import AboutUs from "./AboutUs";  // Import the login component
 import Navbar from "./Navbar";
+import ContactUs from "./ContactUs";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/" element={<Home />} /> 
                     <Route path="/auth" element={<Auth />} />  
                     <Route path="/about" element={<AboutUs />} />
+                    <Route path="/contact" element={<ContactUs />} />
 
                 </Routes>
             </div>
