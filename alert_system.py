@@ -5,9 +5,14 @@ import sendgrid
 from sendgrid.helpers.mail import Mail
 import pandas as pd
 from twilio.rest import Client
+import os
+from dotenv import load_dotenv
 
-# SendGrid API Key (replace with your own)
-SENDGRID_API_KEY = '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'
+# Load environment variables from .env file
+load_dotenv('dev.env')
+
+# Fetch the SendGrid API key from the environment
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
 # Twilio credentials
 TWILIO_ACCOUNT_SID = 'AC1ca1f54ffee2088bc187d474ddbe057d'  # Replace with your Twilio Account SID

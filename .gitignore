@@ -15,7 +15,7 @@ hydrolearn-f411f-firebase-adminsdk-p51y1-e521470dd6.json
 npm-debug.log*
 
 # Environment variable files (if any)
-.env
+*.env
 
 # Package lock files (optional, but some teams choose not to track these)
 package-lock.json
