@@ -1,0 +1,25 @@
+# Dependency directory
+node_modules/
+
+# Python-related files
+*.pkl
+__pycache__/
+*.py[cod]
+*.csv
+
+# Firebase credentials (Replace this with your actual Firebase file if the name differs)
+hydrolearn-f411f-firebase-adminsdk-p51y1-e521470dd6.json
+
+# Logs and debug files
+*.log
+npm-debug.log*
+
+# Environment variable files (if any)
+.env
+
+# Package lock files (optional, but some teams choose not to track these)
+package-lock.json
+
+# Operating system files (Mac/Linux/Windows)
+.DS_Store
+Thumbs.db
