@@ -1,5 +1,3 @@
-// src/AboutUs.js
-
 import React from 'react';
 
 const AboutUs = () => {
@@ -20,6 +18,7 @@ const AboutUs = () => {
             <div style={styles.teamContainer}>
                 <div style={styles.teamMember}>
                     <h3 style={styles.memberName}>Adith Nishanth Gunaseelan</h3>
+                    <img src="/Adith.jpg" alt="Adith Nishanth Gunaseelan" style={styles.teamImage} />
                     <p style={styles.memberRole}>Software Engineer & Full-stack Developer</p>
                     <p style={styles.memberBio}>Adith specializes in building robust systems and ensuring the smooth integration of real-time data pipelines with user-facing web applications.</p>
                 </div>
@@ -48,7 +47,6 @@ const styles = {
         marginBottom: '20px',
         color: '#333',
     },
-    
     text: {
         fontSize: '1.2em',
         marginBottom: '20px',
@@ -73,6 +71,11 @@ const styles = {
         marginBottom: '20px',
         maxWidth: '300px',
         textAlign: 'left',
+    },
+    teamImage: {
+        width: '100%',
+        borderRadius: '10px',
+        marginBottom: '15px',
     },
     memberName: {
         fontSize: '1.5em',
