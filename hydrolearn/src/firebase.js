@@ -9,9 +9,9 @@ const firebaseConfig = {
     projectId: "hydrolearn-f411f",
     storageBucket: "hydrolearn-f411f.appspot.com",
     messagingSenderId: "120501477962",
-    appId: "1:120501477962:web:7141cf74be94cb0030bcb3",
-    measurementId: "G-ZHTCGY796X"
-};
+    appId: "1:120501477962:web:89a00b2ee43b760430bcb3",
+    measurementId: "G-GPSVNRBWD9"
+  };
 
 
 // Initialize Firebase app
