@@ -6,7 +6,7 @@ node_modules/
 __pycache__/
 *.py[cod]
 *.csv
-
+venv/
 # Firebase credentials (Replace this with your actual Firebase file if the name differs)
 hydrolearn-f411f-firebase-adminsdk-p51y1-e521470dd6.json
 
