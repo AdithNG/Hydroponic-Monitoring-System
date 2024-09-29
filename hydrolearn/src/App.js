@@ -7,6 +7,7 @@ import ContactUs from "./ContactUs";
 import SignUp from "./SignUp";
 import Auth from './Auth';
 import Dashboard from "./Dashboard";
+import GetStarted from "./getStarted";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/auth" element={<Auth />} />
+                    <Route path="/getStarted" element = {<GetStarted />} />
 
                 </Routes>
         </Router>

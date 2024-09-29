@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "chart.js": "^4.4.4",
     "firebase": "^10.13.2",
+    "react-chartjs-2": "^5.2.0",
     "react-router-dom": "^6.26.2"
   }
 }

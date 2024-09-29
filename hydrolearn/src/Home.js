@@ -11,7 +11,7 @@ const Home = () => {
             <div className="welcome-section">
                 <h1 className="title">Welcome to HydroLearn</h1>
                 <p className="subtitle">Your reliable system for monitoring hydroponic parameters in real-time. Manage your hydroponic garden effectively and efficiently.</p>
-                <button className="cta-button" onClick={() => navigate('/dashboard')}>Get Started</button>
+                <button className="get-started-button" onClick={() => navigate('/getStarted')}>Get Started</button>
             </div>
 
             {/* Key Features Section */}

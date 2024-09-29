@@ -9,11 +9,16 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
 }
 
-
 .nav-left h2 {
     margin: 0;
     font-size: 1.8em;
     color: #3498db; /* Same color as your theme */
+}
+
+/* Add this to remove underlines from all links in the navbar */
+.nav-right a, .nav-left a {
+    text-decoration: none;
+    color: #3498db; /* Ensures the text color is consistent */
 }
 
 .nav-right .nav-button {
@@ -25,10 +30,21 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none; /* Prevent underlining */
 }
 
 .nav-right .nav-button:hover {
     background-color: #3498db;
     color: white;
+    text-decoration: none;
 }
 
+/* Initially hide the button (for all pages) */
+.nav-right .nav-button {
+    display: none;
+}
+
+/* Show the button only when on the dashboard page */
+.navbar .nav-button.show {
+    display: inline-block;
+}
