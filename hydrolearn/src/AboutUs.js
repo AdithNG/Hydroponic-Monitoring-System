@@ -3,9 +3,9 @@ import React from 'react';
 const AboutUs = () => {
     return (
         <div style={styles.container}>
-            <h1 style={styles.title}>About HydroLearn</h1>
+            <h1 style={styles.title}>About HydroSesnse</h1>
             <p style={styles.text}>
-                HydroLearn was created by a passionate team dedicated to making hydroponic farming more efficient and accessible. 
+                HydroSense was created by a passionate team dedicated to making hydroponic farming more efficient and accessible. 
                 Our mission is to provide growers with real-time monitoring and insights to ensure optimal growing conditions 
                 for their plants. Through our platform, you can easily track and manage key parameters like temperature, humidity, and pH levels.
             </p>
@@ -23,9 +23,9 @@ const AboutUs = () => {
                     <p style={styles.memberBio}>Adith specializes in building robust systems and ensuring the smooth integration of real-time data pipelines with user-facing web applications.</p>
                 </div>
                 <div style={styles.teamMember}>
-                    <h3 style={styles.memberName}>Anjali</h3>
+                    <h3 style={styles.memberName}>Anjali Nilendu Jha</h3>
                     <p style={styles.memberRole}>Database Engineer</p>
-                    <p style={styles.memberBio}>Anjali manages and optimizes the MongoDB database, ensuring that HydroLearn operates smoothly with real-time data access and storage capabilities.</p>
+                    <p style={styles.memberBio}>Anjali manages and optimizes the Firebase database, ensuring that HydroSense operates smoothly with real-time data access and storage capabilities.</p>
                 </div>
             </div>
         </div>

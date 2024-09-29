@@ -13,7 +13,7 @@ const ContactUs = () => {
                     <p>Phone: <a href="tel:+16673454053">+1 (667) 345-4053</a></p>
                 </div>
                 <div style={styles.contactCard}>
-                    <h3 style={styles.name}>Anjali</h3>
+                    <h3 style={styles.name}>Anjali Nilendu Jha</h3>
                     <p style={styles.role}>Database Engineer</p>
                     <p>Phone: <a href="tel:+917276674119">+91 72766 74119</a></p>
                 </div>

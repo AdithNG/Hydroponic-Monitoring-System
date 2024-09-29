@@ -36,10 +36,10 @@ humidity_lower_limit = 40.0
 ph_upper_limit = 7.0
 ph_lower_limit = 5.5
 
-# Function to fetch real sensor data from Firebase
-def fetch_data_from_firebase():
+# Function to fetch real sensor data for a specific plant from Firebase
+def fetch_data_from_firebase(plant_name):
     ref = db.reference('sensor_data')  # Reference to 'sensor_data' node in Firebase
-    data = ref.get()  # Fetch all data from Firebase
+    data = ref.order_by_child('hydroponic_plant').equal_to(plant_name).get()  # Fetch data for the specific plant
     return data
 
 # Process and format the real sensor data
@@ -60,12 +60,15 @@ def process_data(data):
 
 # Function to update the plot
 def update_graph(i):
+    # Specify the plant name to monitor (modify based on your choice)
+    plant_name = "Apple"  # Change this to select a different plant
+    
     # Fetch and process the real sensor data
-    data = fetch_data_from_firebase()
+    data = fetch_data_from_firebase(plant_name)
     process_data(data)
 
     # Prepare input for prediction (last fetched data)
-    if temperatures and humidities and ph_levels and plants:
+    if temperatures and humidities and ph_levels:
         last_plant_name = plants[-1]  # Get the most recent plant name
         input_data = pd.DataFrame({
             'temperature': [temperatures[-1]],
@@ -107,7 +110,8 @@ def update_graph(i):
     pred_ph_line.set_data(predicted_timestamps_limited, predicted_ph_levels_limited)
 
     # Update the x-axis limits
-    ax.set_xlim(min(real_timestamps), max(real_timestamps))
+    if real_timestamps:
+        ax.set_xlim(min(real_timestamps), max(real_timestamps))
 
 # Set up the figure and axis
 fig, ax = plt.subplots(figsize=(10, 6))

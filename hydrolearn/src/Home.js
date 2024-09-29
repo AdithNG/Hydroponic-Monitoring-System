@@ -9,7 +9,7 @@ const Home = () => {
         <div>
             {/* Main Welcome Section */}
             <div className="welcome-section">
-                <h1 className="title">Welcome to HydroLearn</h1>
+                <h1 className="title">Welcome to HydroSense</h1>
                 <p className="subtitle">Your reliable system for monitoring hydroponic parameters in real-time. Manage your hydroponic garden effectively and efficiently.</p>
                 <button className="get-started-button" onClick={() => navigate('/getStarted')}>Get Started</button>
             </div>
@@ -32,14 +32,14 @@ const Home = () => {
                     </div>
                     <div className="feature">
                         <h3>Predictive Analytics</h3>
-                        <p>HydroLearn predicts future system conditions, helping you prevent issues before they arise.</p>
+                        <p>HydroSense predicts future system conditions, helping you prevent issues before they arise.</p>
                     </div>
                 </div>
             </section>
 
             {/* Footer */}
             <footer className="footer">
-                <p>HydroLearn &copy; 2024 | Created by the HydroLearn Team</p>
+                <p>HydroSense &copy; 2024 | Created by the HydroSense Team</p>
             </footer>
         </div>
     );

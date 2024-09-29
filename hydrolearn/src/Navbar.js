@@ -29,7 +29,7 @@ const Navbar = ({ user }) => {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" style={{ textDecoration: 'none', color: '#3498db' }}>
-          <h2>HydroLearn</h2>
+          <h2>HydroSense</h2>
         </Link>
       </div>
       <div className="nav-right">

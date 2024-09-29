@@ -85,7 +85,7 @@ def fetch_latest_predicted_data():
 # Function to check actual and predicted data and send alerts
 def check_alerts(actual, predicted):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    team_name = "HydroLearn Team"
+    team_name = "HydroSense Team"
 
     # Check actual temperature
     if actual['temperature'] > TEMP_HIGH:

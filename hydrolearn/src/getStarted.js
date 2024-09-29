@@ -11,9 +11,9 @@ const GetStarted = () => {
 
   return (
     <div className="get-started-container">
-      <h1>Welcome to HydroLearn</h1>
+      <h1>Welcome to HydroSense</h1>
       <p>
-        HydroLearn is your trusted system for monitoring hydroponic parameters in real-time.
+        HydroSense is your trusted system for monitoring hydroponic parameters in real-time.
         Manage your hydroponic garden effectively and efficiently. This guide will help you
         get started on your journey to optimizing plant growth.
       </p>
@@ -31,9 +31,9 @@ const GetStarted = () => {
         Learn more about hydroponics and plant care with our educational resources:
       </p>
       <ul>
-        <li><a href="/hydroponics-guide">How Hydroponics Works</a></li>
-        <li><a href="/best-practices">Best Practices for Hydroponic Gardening</a></li>
-        <li><a href="/common-mistakes">Common Mistakes to Avoid in Hydroponics</a></li>
+        <li><a href="https://www.nal.usda.gov/farms-and-agricultural-production-systems/hydroponics">How Hydroponics Works</a></li>
+        <li><a href="https://mega-pot.com/hydroponics/5-hydroponic-tips-to-increase-your-yields/">Best Practices for Hydroponic Gardening</a></li>
+        <li><a href="https://www.saferbrand.com/articles/hydroponic-garden-mistakes">Common Mistakes to Avoid in Hydroponics</a></li>
       </ul>
 
       <button className="dashboard-button" onClick={handleGoToLogin}>

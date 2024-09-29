@@ -14,26 +14,28 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+
   const handleSignUp = (e) => {
     e.preventDefault();
 
     if (name.trim() === "") {
-      setError("Please enter your name.");
+      alert("Please enter your name.");
       return;
     }
 
-    if (email.trim() === "") {
-      setError("Please enter a valid email address.");
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
+      alert("Password must be at least 6 characters long.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      alert("Passwords do not match.");
       return;
     }
 
@@ -54,19 +56,21 @@ const SignUp = () => {
               email: user.email
             }).then(() => {
               console.log('User details saved to Firebase Database');
+              alert("User registered successfully!");
               navigate("/dashboard"); // Navigate to dashboard after successful signup
             }).catch((error) => {
               console.error("Error saving user details to database:", error);
+              alert("Error saving user details to the database.");
             });
           })
           .catch((error) => {
             console.error("Error updating user profile: ", error);
-            setError(error.message); // Display Firebase-specific error message
+            alert("Error updating user profile: " + error.message);
           });
       })
       .catch((error) => {
         console.error("Error signing up: ", error);
-        setError(error.message); // Display Firebase-specific error message
+        alert("Error signing up: " + error.message); // Display Firebase-specific error message via alert
       });
   };
 
@@ -84,9 +88,6 @@ const SignUp = () => {
             placeholder="Enter your name"
             required
           />
-          {error && error.includes("name") && (
-            <span className="error-message">Please enter your name.</span>
-          )}
 
           <label htmlFor="email">Email</label>
           <input
@@ -97,9 +98,6 @@ const SignUp = () => {
             placeholder="Enter your email"
             required
           />
-          {error && error.includes("email") && (
-            <span className="error-message">Format: email@example.com</span>
-          )}
 
           <label htmlFor="password">Password</label>
           <input
@@ -110,9 +108,6 @@ const SignUp = () => {
             placeholder="Enter your password"
             required
           />
-          {error && error.includes("Password") && (
-            <span className="error-message">Password must be at least 6 characters long.</span>
-          )}
 
           <label htmlFor="confirm-password">Confirm Password</label>
           <input
@@ -123,15 +118,14 @@ const SignUp = () => {
             placeholder="Confirm your password"
             required
           />
-          {error && error.includes("match") && (
-            <span className="error-message">Passwords do not match.</span>
-          )}
 
-          {error && !error.includes("email") && !error.includes("Password") && !error.includes("match") && (
-            <span className="error-message">{error}</span>
-          )}
-
-          <button type="submit" className="signup-button">Sign Up</button>
+          <button 
+            type="submit" 
+            className="signup-button"
+            disabled={!name || !emailRegex.test(email) || password.length < 6 || password !== confirmPassword}
+          >
+            Sign Up
+          </button>
         </form>
         <p className="login-text">
           Already have an account? <a href="/auth" className="login-link">Login</a>

@@ -1,0 +1,104 @@
+.notes-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #f7f9fc;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notes-container h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .note-input {
+    width: 100%;
+    max-width: 780px;
+    height: 150px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #3498db;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    margin: 0 auto; /* Center the note input */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    resize: none; /* Prevent resizing */
+  }
+  
+  .save-note-button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-note-button:hover {
+    background-color: #218838;
+  }
+  
+  .saved-notes {
+    margin-top: 30px;
+  }
+  
+  .note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #3498db;
+    word-wrap: break-word; /* Ensure long text wraps */
+    word-break: break-all; /* Break continuous long text */
+  }
+  
+  .note-item p {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+    flex-grow: 1;
+    margin-right: 15px; /* Add spacing between text and delete button */
+  }
+  
+  .note-timestamp {
+    font-size: 0.9em;
+    color: #95a5a6;
+    margin-right: 15px;
+  }
+  
+  .delete-note-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-note-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .message {
+    text-align: center;
+    color: #28a745;
+    font-size: 1.1em;
+    margin-top: 20px;
+  }
+  
