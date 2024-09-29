@@ -10,6 +10,8 @@ venv/
 # Firebase credentials (Replace this with your actual Firebase file if the name differs)
 hydrolearn-f411f-firebase-adminsdk-p51y1-e521470dd6.json
 
+#ignore config.json file
+config.json
 # Logs and debug files
 *.log
 npm-debug.log*

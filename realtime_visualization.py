@@ -3,6 +3,8 @@ import matplotlib.animation as animation
 import datetime
 import firebase_admin
 from firebase_admin import db, credentials
+import joblib
+import pandas as pd
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("hydrolearn-f411f-firebase-adminsdk-p51y1-e521470dd6.json")
@@ -10,11 +12,15 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://hydrolearn-f411f-default-rtdb.firebaseio.com/'  # Your Firebase URL
 })
 
+# Load the trained model
+model = joblib.load('random_forest_model.pkl')
+
 # Initialize lists to store real sensor data
 timestamps = []
 temperatures = []
 humidities = []
 ph_levels = []
+plants = []  # List to store plant names
 
 # Initialize lists to store predicted data
 predicted_timestamps = []
@@ -36,18 +42,13 @@ def fetch_data_from_firebase():
     data = ref.get()  # Fetch all data from Firebase
     return data
 
-# Function to fetch predicted data from Firebase
-def fetch_predicted_data_from_firebase():
-    ref = db.reference('predicted_data')  # Reference to 'predicted_data' node in Firebase
-    data = ref.get()  # Fetch all predicted data from Firebase
-    return data
-
 # Process and format the real sensor data
 def process_data(data):
     timestamps.clear()
     temperatures.clear()
     humidities.clear()
     ph_levels.clear()
+    plants.clear()  # Clear previous plant data
 
     for key, entry in data.items():
         # Convert the timestamp string to datetime
@@ -55,30 +56,33 @@ def process_data(data):
         temperatures.append(float(entry['temperature']))
         humidities.append(float(entry['humidity']))
         ph_levels.append(float(entry['ph_level']))
-
-# Process and format the predicted data
-def process_predicted_data(data):
-    predicted_timestamps.clear()
-    predicted_temperatures.clear()
-    predicted_humidities.clear()
-    predicted_ph_levels.clear()
-
-    for key, entry in data.items():
-        # Convert the timestamp string to datetime
-        predicted_timestamps.append(datetime.datetime.strptime(entry['timestamp'], "%Y-%m-%d %H:%M:%S"))
-        predicted_temperatures.append(float(entry['predicted_temperature']))
-        predicted_humidities.append(float(entry['predicted_humidity']))
-        predicted_ph_levels.append(float(entry['predicted_ph_level']))
+        plants.append(entry['hydroponic_plant'])  # Store the plant name
 
 # Function to update the plot
 def update_graph(i):
     # Fetch and process the real sensor data
     data = fetch_data_from_firebase()
     process_data(data)
-    
-    # Fetch and process the predicted data
-    predicted_data = fetch_predicted_data_from_firebase()
-    process_predicted_data(predicted_data)
+
+    # Prepare input for prediction (last fetched data)
+    if temperatures and humidities and ph_levels and plants:
+        last_plant_name = plants[-1]  # Get the most recent plant name
+        input_data = pd.DataFrame({
+            'temperature': [temperatures[-1]],
+            'humidity': [humidities[-1]],
+            'ph_level': [ph_levels[-1]],
+            'hydroponic_plant': [last_plant_name]  # Use the most recent plant name
+        })
+
+        # Make predictions using the loaded model
+        predictions = model.predict(input_data)
+
+        # Store predicted values
+        predicted_temperature, predicted_humidity, predicted_ph = predictions[0]
+        predicted_timestamps.append(datetime.datetime.now())
+        predicted_temperatures.append(predicted_temperature)
+        predicted_humidities.append(predicted_humidity)
+        predicted_ph_levels.append(predicted_ph)
 
     # Limit to the last 20 entries
     max_entries = 20
@@ -105,58 +109,6 @@ def update_graph(i):
     # Update the x-axis limits
     ax.set_xlim(min(real_timestamps), max(real_timestamps))
 
-    # Update the hover annotation (we'll modify this in the next section)
-    annot.set_visible(False)
-
-# Mouse event function for interactive hover annotations
-def on_hover(event):
-    # Check if mouse is within the axes and within a plot line
-    if event.inaxes == ax:
-        # Check for real and predicted data lines
-        for line in [temp_line, humidity_line, ph_line, pred_temp_line, pred_humidity_line, pred_ph_line]:
-            contains, index = line.contains(event)
-            if contains:
-                # Set the annotation text based on the line and position
-                annot.xy = (event.xdata, event.ydata)
-                annot.set_text(f"{line.get_label()}: {event.ydata:.2f}")
-                annot.set_visible(True)
-                fig.canvas.draw_idle()
-                return  # Return early since we've found a matching line
-
-        # Check if the mouse is near the temperature limits
-        if abs(event.ydata - temp_upper_limit) < 0.5:
-            annot.xy = (event.xdata, temp_upper_limit)
-            annot.set_text(f"Temperature Upper Limit: {temp_upper_limit:.2f}")
-            annot.set_visible(True)
-        elif abs(event.ydata - temp_lower_limit) < 0.5:
-            annot.xy = (event.xdata, temp_lower_limit)
-            annot.set_text(f"Temperature Lower Limit: {temp_lower_limit:.2f}")
-            annot.set_visible(True)
-        # Check if the mouse is near the humidity limits
-        elif abs(event.ydata - humidity_upper_limit) < 0.5:
-            annot.xy = (event.xdata, humidity_upper_limit)
-            annot.set_text(f"Humidity Upper Limit: {humidity_upper_limit:.2f}")
-            annot.set_visible(True)
-        elif abs(event.ydata - humidity_lower_limit) < 0.5:
-            annot.xy = (event.xdata, humidity_lower_limit)
-            annot.set_text(f"Humidity Lower Limit: {humidity_lower_limit:.2f}")
-            annot.set_visible(True)
-        # Check if the mouse is near the pH limits
-        elif abs(event.ydata - ph_upper_limit) < 0.05:
-            annot.xy = (event.xdata, ph_upper_limit)
-            annot.set_text(f"pH Upper Limit: {ph_upper_limit:.2f}")
-            annot.set_visible(True)
-        elif abs(event.ydata - ph_lower_limit) < 0.05:
-            annot.xy = (event.xdata, ph_lower_limit)
-            annot.set_text(f"pH Lower Limit: {ph_lower_limit:.2f}")
-            annot.set_visible(True)
-        else:
-            # If not near any limit, hide the annotation
-            annot.set_visible(False)
-
-        fig.canvas.draw_idle()
-
-
 # Set up the figure and axis
 fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -178,12 +130,6 @@ ax.axhline(y=humidity_lower_limit, color='blue', linestyle='--')
 ax.axhline(y=ph_upper_limit, color='green', linestyle='--', label='pH Level Limit')
 ax.axhline(y=ph_lower_limit, color='green', linestyle='--')
 
-# Create an annotation object
-annot = ax.annotate("", xy=(0, 0), xytext=(20, 20), textcoords="offset points",
-                    bbox=dict(boxstyle="round", fc="w"),
-                    arrowprops=dict(arrowstyle="->"))
-annot.set_visible(False)
-
 # Add legends and formatting
 ax.legend(loc='upper left')
 ax.set_title('Real-Time Sensor Data with Predictions and Alerts Over Time')
@@ -193,9 +139,6 @@ plt.xticks(rotation=45)  # Rotate timestamp labels for readability
 
 # Create the animation
 ani = animation.FuncAnimation(fig, update_graph, interval=5000)  # Update every 5 seconds (5000 ms)
-
-# Connect the hover event to the function
-fig.canvas.mpl_connect("motion_notify_event", on_hover)
 
 # Show the animated plot
 plt.tight_layout()
