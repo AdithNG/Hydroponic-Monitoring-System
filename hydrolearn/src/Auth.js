@@ -1,85 +1,84 @@
-import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import './Auth.css';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase"; // Ensure this is pointing to your Firebase setup
+import './Auth.css'; // Import your CSS
 
 const Auth = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const auth = getAuth();
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-        // Clear any previous errors
-        setEmailError('');
-        setPasswordError('');
+    if (email.trim() === "") {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setEmailError('Format: email@example.com');
-            return;
-        }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
 
-        // Validate password: minimum 6 characters, 1 uppercase and 1 lowercase letter
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-        if (!passwordRegex.test(password)) {
-            if (password.length < 6) {
-                setPasswordError('Password must be at least 6 characters long');
-            } else {
-                setPasswordError('Password must contain both uppercase and lowercase letters');
-            }
-            return;
-        }
+    setError(""); // Clear any previous error messages
 
-        // Perform Firebase authentication
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                alert('Login successful!');
-                console.log('User logged in:', userCredential.user);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
-    };
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("User logged in: ", userCredential.user);
+        navigate("/dashboard"); // Navigate to the dashboard
+      })
+      .catch((error) => {
+        console.error("Error logging in: ", error);
+        setError(error.message); // Display Firebase-specific error message
+      });
+  };
 
-    return (
-        <div className="auth-page"> {/* Scoped background */}
-            <div className="auth-container">
-                <h1 className="auth-title">Login</h1>
-                <form className="auth-form" onSubmit={handleLogin}>
-                    <label htmlFor="email">Email</label>
-                    <input 
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    {emailError && <div className="email-hint">{emailError}</div>}
+  return (
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h2 className="auth-title">Login</h2>
+        <form onSubmit={handleLogin} className="auth-form">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+          />
+          {error && error.includes("email") && (
+            <span className="error-message">Format: email@example.com</span>
+          )}
 
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    {passwordError && <div className="email-hint">{passwordError}</div>}
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            required
+          />
+          {error && error.includes("Password") && (
+            <span className="error-message">Password must be at least 6 characters long.</span>
+          )}
 
-                    <button type="submit" className="auth-button">Login</button>
-                </form>
+          {error && !error.includes("email") && !error.includes("Password") && (
+            <span className="error-message">{error}</span>
+          )}
 
-                <div className="signup-text">
-                    Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
-                </div>
-            </div>
-        </div>
-    );
+          <button type="submit" className="auth-button">Login</button>
+        </form>
+        <p className="signup-text">
+          Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Auth;

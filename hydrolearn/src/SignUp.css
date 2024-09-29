@@ -1,5 +1,5 @@
-/* Auth page styles only */
-.auth-wrapper {
+/* SignUp page styles only */
+.signup-wrapper {
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     min-height: 100vh; /* Ensures the background covers the full viewport */
     display: flex;
@@ -10,7 +10,7 @@
 }
 
 /* Container styling */
-.auth-container {
+.signup-container {
     width: 100%;
     max-width: 400px;
     padding: 40px;
@@ -23,12 +23,12 @@
 }
 
 /* Hover effect for the container */
-.auth-container:hover {
+.signup-container:hover {
     transform: scale(1.02);
 }
 
 /* Title styling */
-.auth-title {
+.signup-title {
     font-size: 2.5em;
     margin-bottom: 30px;
     color: #3498db;
@@ -36,19 +36,19 @@
 }
 
 /* Form styling */
-.auth-form {
+.signup-form {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
 
-.auth-form label {
+.signup-form label {
     margin-bottom: 8px;
     font-weight: 600;
     color: #333;
 }
 
-.auth-form input {
+.signup-form input {
     margin-bottom: 10px;
     padding: 12px;
     font-size: 1em;
@@ -59,14 +59,14 @@
     width: 100%; /* Ensure inputs stretch to full width */
 }
 
-.auth-form input:focus {
+.signup-form input:focus {
     border-color: #3498db;
     background-color: #fff;
     box-shadow: 0px 0px 4px rgba(52, 152, 219, 0.2);
 }
 
 /* Button styling */
-.auth-button {
+.signup-button {
     padding: 14px;
     background-color: #3498db;
     color: white;
@@ -80,36 +80,27 @@
     width: 100%; /* Ensure button stretches to full width */
 }
 
-.auth-button:hover {
+.signup-button:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
 }
 
-/* Signup text styling */
-.signup-text {
+/* Login text styling */
+.login-text {
     margin-top: 15px;
     font-size: 0.9em;
     color: #666;
 }
 
-.signup-link {
+.login-link {
     color: #3498db;
     cursor: pointer;
     text-decoration: none;
     font-weight: 600;
 }
 
-.signup-link:hover {
+.login-link:hover {
     color: #2980b9;
-}
-
-/* Email hint styling */
-.email-hint {
-    color: red;
-    font-size: 0.8em;
-    margin-top: -8px;
-    margin-bottom: 10px;
-    font-style: italic;
 }
 
 /* Error message */
