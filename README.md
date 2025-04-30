@@ -2,6 +2,9 @@
 
 **HydroSense** is an AI-powered, real-time monitoring and alert system designed to optimize and improve the sustainability of hydroponic farming. It gathers real-time sensor data (temperature, humidity, pH) from a hydroponic setup, uses machine learning to predict future conditions, and sends alerts when critical thresholds are exceeded. The project leverages data analytics, machine learning, and Firebase integration to create a system that helps improve plant growth efficiency while reducing resource consumption.
 
+[![View Demo on Devpost](https://img.shields.io/badge/Demo-Devpost-blue?style=for-the-badge)](https://devpost.com/software/hydrosense-zypq28)
+
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
